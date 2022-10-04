@@ -1,0 +1,13 @@
+Dataset,TD3+BC,AWAC,BC,CQL,IQL
+finetune-halfcheetah-medium-expert-v2,74.36,83.6,61.77,96.72,87.74
+finetune-halfcheetah-medium-replay-v2,50.52,46.87,28.66,53.25,49.53
+finetune-halfcheetah-medium-v2,51.9,52.89,42.86,55.29,49.24
+finetune-halfcheetah-random-v2,48.53,30.67,2.26,34.17,50.87
+finetune-hopper-medium-expert-v2,112.71,111.9,48.01,100.25,110.66
+finetune-hopper-medium-replay-v2,92.56,65.56,13.19,102.78,100.38
+finetune-hopper-medium-v2,63.03,45.45,58.92,94.31,73.59
+finetune-hopper-random-v2,9.85,8.78,2.47,4.56,12.05
+finetune-walker2d-medium-expert-v2,107.77,1.41,108.35,110.73,110.81
+finetune-walker2d-medium-replay-v2,77.78,94.11,5.61,89.77,95.71
+finetune-walker2d-medium-v2,85.01,21.32,66.47,83.7,84.24
+finetune-walker2d-random-v2,8.6,1.67,0.5,0.33,10.56

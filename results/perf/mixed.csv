@@ -1,0 +1,4 @@
+Dataset,TD3+BC,AWAC,BC,CQL,IQL
+halfcheetah-mixed-v2,80.65,29.55,57.38,93.47,68.04
+hopper-mixed-v2,112.42,110.36,86.67,0.75,51.37
+walker2d-mixed-v2,8.15,98.36,108.79,109.71,109.83
