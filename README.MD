@@ -41,6 +41,9 @@ Each `scripts` folder has a `plot.sh` that can be run to produce the main plots 
 
 ## Acknowledgements
 
+The authors would like to thank the Digital Research Alliance of Canada
+for compute resources, NSERC, Google and CIFAR for research funding.
+
 * The IQL baseline is modified from the [here](https://github.com/ikostrikov/implicit_q_learning).
 * The CQL baseline is modified from [here](https://github.com/young-geng/JaxCQL).
 * The TD3+BC baseline is modified from [here](https://github.com/ethanluoyc/td3_bc_jax).
