@@ -4,14 +4,13 @@ This is the repository that contains source code for the [Seq Eval website](http
 
 If you find Sequential Evaluation useful for your work please cite:
 ```
-@inproceedings{
-sujit2022bridging,
-  title={Bridging the Gap Between Offline and Online Reinforcement Learning Evaluation Methodologies},
-  author={Shivakanth Sujit and Pedro Braga and Jorg Bornschein and Samira Ebrahimi Kahou},
-  booktitle={3rd Offline RL Workshop: Offline RL as a ''Launchpad''},
-  year={2022},
-  url={https://openreview.net/forum?id=lT4dOUtZYZ}
-}
+@article{sujit2022bridging,
+        title={Bridging the Gap Between Offline and Online Reinforcement Learning Evaluation Methodologies},
+        author={Shivakanth Sujit and Pedro Braga and Jorg Bornschein and Samira Ebrahimi Kahou},
+        publisher = {arXiv},
+        year = {2022},
+        url = {https://arxiv.org/abs/2212.08131},
+      }
 ```
 
 # Website License
