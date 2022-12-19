@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="This paper proposes a sequential approach to evaluation for offline RL methods that captures their data efficiency and performance simultaneously.">
+  <meta name="keywords" content="evaluation methods, sequential evaluation, reinforcement learning, RL">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:title" content="Sequential Evaluation for Offline RL">
+  <meta property="og:image" content="https://github.com/shivakanthsujit/seq_eval/blob/gh-pages/static/images/favicon.jpg">
+  <meta property="og:description" content="This paper proposes a sequential approach to evaluation for offline RL methods that captures their data efficiency and performance simultaneously.">
+  <meta property="og:url" content="https://shivakanthsujit.github.io/seq_eval/">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Sequential Evaluation for Offline RL</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.jpg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+  </script>
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="http://shivakanthsujit.github.io/">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Bridging the Gap Between Offline and Online Reinforcement Learning Evaluation Methodologies</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="http://shivakanthsujit.github.io/">Shivakanth Sujit</a><sup>12</sup>,</span>
+              <span class="author-block">
+                <a href="https://phbraga.com/">Pedro Braga</a><sup>123</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=X7kZFnoAAAAJ&hl=en">Jörg Bornschein</a><sup>4</sup>,</span>
+            <span class="author-block">
+              <a href="https://saebrahimi.github.io/">Samira Ebrahimi Kahou</a><sup>12</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>ÉTS Montréal,</span>
+            <span class="author-block"><sup>2</sup>Mila, Quebec AI Institute,</span>
+            <span class="author-block"><sup>3</sup>Universidade Federal de Pernambuco,</span>
+            <span class="author-block"><sup>4</sup>DeepMind London</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2212.08131"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2212.08131"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Tweet Link. -->
+              <span class="link-block">
+                <a href="https://twitter.com/ShivaSujit/status/1598711848936800260"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-twitter"></i>
+                  </span>
+                  <span>Tweet</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/shivakanthsujit/seq_eval"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="https://drive.google.com/file/d/1tgbYR4W8bVCJxN-nYUjwwvw6rvIUEizx/view?usp=sharing"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Slides</span>
+                  </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <!-- <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="https://homes.cs.washington.edu/~kpar/nerfies/videos/teaser.mp4"
+                type="video/mp4">
+      </video> -->
+      <img id="teaser" src="static/images/thumb.png">
+      <h2 class="subtitle has-text-centered">
+        We propose to sequentially increase the amount of data available to the agent over time, alternating between adding data and performing gradient updates on mini batches.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Reinforcement learning (RL) has shown great promise with algorithms learning in environments
+            with large state and action spaces purely from scalar reward signals.
+            A crucial challenge for current deep RL algorithms is that they require a tremendous amount
+            of environment interactions for learning. This can be infeasible in situations where such interactions are expensive; such as in robotics.
+            Offline RL algorithms try to address this issue by bootstrapping the learning process from
+            existing logged data without needing to interact with the environment from the very beginning.
+          </p>
+          <p>
+            While online RL algorithms are typically evaluated as a function of the number of
+            environment interactions,
+            there exists no single established protocol for evaluating offline RL this way. In
+            this paper, we propose
+            a sequential approach to evaluate offline RL algorithms as a function of the training
+            set size and thus by their data efficiency.
+          </p>
+          <p>
+            Sequential evaluation provides valuable insights into the data efficiency of the learning process
+            and the robustness of algorithms to distribution changes in the dataset while also harmonizing the
+            visualization of the offline and online learning phases.
+            Our approach is generally applicable and easy to implement. We compare several existing offline RL
+            algorithms using this approach and present insights from a variety of tasks and offline datasets.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div> -->
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Motivation</h2>
+    <div class="columns is-centered">
+      <div class="column is-fullwidth">
+        <p>
+          There is a lack of consensus in the
+          offline RL community on evaluation protocols for these methods.
+          The most widely used approach is to train for a fixed number of epochs on the offline
+          dataset and report performance through the average return obtained over a number
+          of episodes in the environment. We contend that there are a few issues with this approach.
+        </p>
+        <br>
+        <p>
+          Firstly, this approach does not provide much information about the sample efficiency of
+          the algorithm since it is trained on all data at every epoch. This means that practitioners
+          do not see how the algorithm can scale with the dataset size, or if it can achieve good
+          performance even with small amounts of logged data.
+          Furthermore, there can be distribution
+          changes in the quality of the policy in the dataset, and evaluating as a function of epochs
+          hides how algorithms react to these changes. Finally, there is a disconnection in the
+          evaluation strategies of online and offline RL algorithms, which can make it difficult
+          to compare algorithms realistically.
+        </p>
+      </div>
+    </div>
+
+
+    <h2 class="title is-3">Sequential Evaluation</h3>
+    <p>
+      Instead of treating the dataset as a fixed entity, we propose that the portion
+      of the dataset available to the agent change over time and that the agents'
+      performance is evaluated as a function of the available data.
+      This can be implemented by reusing any of the prevalent replay-buffer-based training
+      schemes from online deep RL. But instead of extending the replay-buffer with sampled
+      trajectories from the currently learned policy, we instead slowly insert prerecorded
+      offline RL data. We alternate between adding new samples to the buffer and performing
+      gradient updates using mini batches sampled from the buffer. The number of samples
+      added to the buffer at a time is denoted by $\gamma$ and the number of gradient
+      steps performed between each addition to the buffer is denoted by $K$.
+    </p>
+
+    <br>
+    <h2 class="title is-3">Algorithm</h3>
+      <img id="teaser" src="static/images/algo.png">
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Sequential Evaluation in Practice</h2>
+    <div class="columns is-centered">
+
+      <!-- Standard -->
+      <div class="column">
+        <div class="content">
+          <h2 class="title is-4">Standard</h2>
+          <p>
+            Sequentially add samples from the dataset
+          </p>
+          <img id="teaser" src="static/images/standard.png">
+          <p>
+            <ul>
+              <li>Algorithms generally converge with &lt 50% of data and don't improve beyond that.</li>
+              <li>Highlights that most of the tested algorithms are not very data-hungry.</li>
+            </ul>
+          </p>
+        </div>
+      </div>
+      <!--/ Standard. -->
+
+      <!-- OF. -->
+      <div class="column">
+        <h2 class="title is-4">Online Finetuning</h2>
+        <div class="columns is-centered">
+          <div class="column content">
+            <p>
+              After adding dataset, fixed budget of online interactions
+            </p>
+            <img id="teaser" src="static/images/finetune.png">
+            <ul>
+              <li>Algorithms generally converge with &lt 50% of data and don't improve beyond that.</li>
+              <li>Highlights that most of the tested algorithms are not very data-hungry.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!--/ OF. -->
+
+      <!-- Mixed. -->
+      <div class="column">
+        <h2 class="title is-4">Mixed</h2>
+        <div class="columns is-centered">
+          <div class="column content">
+            <p>
+              Study effect of change in dataset generating policy
+            </p>
+            <img src="static/images/mixed.png">
+          <ul>
+            </li>Tested algorithms able to quickly adapt to changes in the dataset.</li>
+            </li>Even BC is a strong baseline, successfully learning from each portion of the dataset.</li>
+          </ul>
+          </div>
+        </div>
+      </div>
+      <!--/ Mixed. -->
+    </div>
+
+    <!-- Mixed. -->
+    <!-- <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h3 class="title is-4">Mixed</h3>
+        <div class="content has-text-justified">
+          <p>
+            Study effect of change in dataset generating policy
+          </p>
+          <img src="static/images/mixed.png">
+          <ul>
+            </li>Tested algorithms able to quickly adapt to changes in the dataset.</li>
+            </li>Even BC is a strong baseline, successfully learning from each portion of the dataset.</li>
+          </ul>
+        </div>
+      </div>
+    </div> -->
+    <!--/ Mixed. -->
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{sujit2022bridging,
+        title={Bridging the Gap Between Offline and Online Reinforcement Learning Evaluation Methodologies},
+        author={Shivakanth Sujit and Pedro Braga and Jorg Bornschein and Samira Ebrahimi Kahou},
+        booktitle={3rd Offline RL Workshop: Offline RL as a ''Launchpad''},
+        year={2022},
+        url={https://openreview.net/forum?id=lT4dOUtZYZ}
+      }</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="content">
+        <p>
+          Website template is borrowed from <a
+            href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
