@@ -2,16 +2,23 @@
 
 [Shivakanth Sujit](http://shivakanthsujit.github.io/), [Pedro Braga](https://phbraga.com/), [Jörg Bornschein](https://scholar.google.com/citations?user=X7kZFnoAAAAJ&hl=en), [Samira Ebrahimi Kahou](https://saebrahimi.github.io/)
 
+
+[![arXiv](https://img.shields.io/badge/arXiv-2212.08131-b31b1b.svg)](https://arxiv.org/abs/2212.08131) [![pub](https://img.shields.io/badge/OfflineRL-NeurIPS2022-blue.svg)](https://openreview.net/pdf?id=lT4dOUtZYZ)
+
+[Wesbite](https://shivakanthsujit.github.io/seq_eval/) | [Slides](https://drive.google.com/file/d/1tgbYR4W8bVCJxN-nYUjwwvw6rvIUEizx/view?usp=sharing) | [Poster](https://drive.google.com/file/d/1f6zkS-vRFi9YdBGR6RKgh8MfG6Jm5MtT/view?usp=sharing) | [Tweet](https://twitter.com/ShivaSujit/status/1598711848936800260)
+
 This repo provides the code for the Seq Eval paper.
 
 If you find our work useful, please cite us in your paper.
 
 ```
 @article{sujit2022bridging,
-  title   = {Bridging the Gap Between Offline and Online Reinforcement Learning Evaluation Methodologies},
-  author  = {Shivakanth Sujit and Pedro H. M. Braga and Jörg Bornschein and Samira Ebrahimi Kahou},
-  year    = {2022},
-}
+        title={Bridging the Gap Between Offline and Online Reinforcement Learning Evaluation Methodologies},
+        author={Shivakanth Sujit and Pedro Braga and Jorg Bornschein and Samira Ebrahimi Kahou},
+        publisher = {arXiv},
+        year = {2022},
+        url = {https://arxiv.org/abs/2212.08131},
+      }
 ```
 
 ## Overview
